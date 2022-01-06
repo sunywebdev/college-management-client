@@ -30,11 +30,9 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "ios": "react-native run-ios",
-    "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest",
-    "test:e2e": "npm run test",
-    "test:e2e:build": "npm run build"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "./node_modules/.bin/netlify-lambda serve src",
+    "build": "react-scripts build"
   },
   "eslintConfig": {
     "extends": [
