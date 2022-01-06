@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import AdminDashboardMain from "./Dashboard/AdminDashboard/AdminDashboardMain";
+import Students from "./Dashboard/AdminDashboard/Students";
+import Teachers from "./Dashboard/AdminDashboard/Teachers";
+import AddStudents from "./Dashboard/AdminDashboard/AddStudents";
+import AddTeachers from "./Dashboard/AdminDashboard/AddTeachers";
+import Account from "./Dashboard/AdminDashboard/Account";
+import Attendance from "./Dashboard/AdminDashboard/Attendance";
+import AddNotices from "./Dashboard/AdminDashboard/AddNotices";
+import AllNotices from "./Dashboard/AdminDashboard/AllNotices";
+import AdminDashboardHome from "./Dashboard/AdminDashboard/AdminDashboardHome";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<div className='App'>
+			<BrowserRouter>
+				<Routes>
+					<Route path='/' element={<AdminDashboardMain />}>
+						<Route exact path='/' element={<AdminDashboardHome />} />
+						<Route path='students' element={<Students />} />
+						<Route path='teachers' element={<Teachers />} />
+						<Route path='addStudents' element={<AddStudents />} />
+						<Route path='addTeachers' element={<AddTeachers />} />
+						<Route path='account' element={<Account />} />
+						<Route path='attendance' element={<Attendance />} />
+						<Route path='addNotices' element={<AddNotices />} />
+						<Route path='allNotices' element={<AllNotices />} />
+					</Route>
+				</Routes>
+			</BrowserRouter>
+		</div>
+	);
 }
 
 export default App;
