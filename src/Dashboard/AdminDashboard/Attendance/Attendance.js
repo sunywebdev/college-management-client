@@ -12,43 +12,76 @@ const students = [
 		name: "Shoyeb Mohammed Suny",
 		roll: 172015,
 		department: "Computer",
-		entryTime: "2022-1-2 13:31:58",
+		attendanceList: [
+			{
+				status: "Present",
+				date: "09/01/2022",
+				time: "12:36:57",
+				count: 1,
+			},
+		],
 	},
 	{
 		name: "Ahsan Mustafa",
 		roll: 172020,
 		department: "Computer",
-		entryTime: "2022-1-2 11:31:00",
+		attendanceList: [
+			{
+				status: "Present",
+				date: "09/01/2022",
+				time: "12:05:57",
+				count: 1,
+			},
+		],
 	},
 	{
 		name: "Mohiuddin Sakib",
 		roll: 172001,
 		department: "Computer",
-		entryTime: "2022-1-2 12:30:40",
+		attendanceList: [
+			{
+				status: "Present",
+				date: "09/01/2022",
+				time: "12:36:57",
+				count: 1,
+			},
+		],
 	},
 	{
 		name: "Md Safayet",
 		roll: 172016,
 		department: "Computer",
-		entryTime: "2022-1-2 11:30:00",
+		attendanceList: [
+			{
+				status: "Present",
+				date: "09/01/2022",
+				time: "12:36:57",
+				count: 1,
+			},
+		],
 	},
 ];
-const msToTime = (milliseconds) => {
-	var hours = milliseconds / (1000 * 60 * 60);
-	var absoluteHours = Math.floor(hours);
-	var h = absoluteHours > 9 ? absoluteHours : "0" + absoluteHours;
-	var minutes = (hours - absoluteHours) * 60;
-	var absoluteMinutes = Math.floor(minutes);
-	var m = absoluteMinutes > 9 ? absoluteMinutes : "0" + absoluteMinutes;
-	var seconds = (minutes - absoluteMinutes) * 60;
-	var absoluteSeconds = Math.floor(seconds);
-	var s = absoluteSeconds > 9 ? absoluteSeconds : "0" + absoluteSeconds;
-	return h + " Hour, " + m + " Minutes, " + s + " Second";
-};
 
+function timeToSec(str) {
+	var p = str.split(":"),
+		s = 0,
+		m = 1;
+
+	while (p.length > 0) {
+		s += m * parseInt(p.pop(), 10);
+		m *= 60;
+	}
+
+	return s;
+}
+function formatSeconds(seconds) {
+	var date = new Date(1970, 0, 1);
+	date.setSeconds(seconds);
+	return date.toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1");
+}
 console.log(students);
 
-const collegeTime = new Date("2022-1-2 11:30:00");
+const collegeTime = "11:30:00";
 
 export default function BasicTable() {
 	return (
@@ -67,15 +100,22 @@ export default function BasicTable() {
 					{students.map((student) => (
 						<TableRow
 							key={student.roll}
-							sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+							sx={{
+								"&:last-child td, &:last-child th": { border: 0 },
+							}}>
 							<TableCell component='th' scope='row'>
 								{student.roll}
 							</TableCell>
 							<TableCell align='left'>{student.name}</TableCell>
 							<TableCell align='left'>{student.department}</TableCell>
-							<TableCell align='left'>{student.entryTime}</TableCell>
 							<TableCell align='left'>
-								{msToTime(new Date(student?.entryTime) - collegeTime)}
+								{student.attendanceList[0].time}
+							</TableCell>
+							<TableCell align='left'>
+								{formatSeconds(
+									timeToSec(student.attendanceList[0].time) -
+										timeToSec(collegeTime),
+								)}
 							</TableCell>
 						</TableRow>
 					))}
