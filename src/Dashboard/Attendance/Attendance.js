@@ -6,6 +6,9 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import Button from "@mui/material/Button";
+import InfoIcon from "@mui/icons-material/Info";
+import { Link } from "react-router-dom";
 
 const students = [
 	{
@@ -17,6 +20,24 @@ const students = [
 				status: "Present",
 				date: "09/01/2022",
 				time: "12:36:57",
+				count: 1,
+			},
+			{
+				status: "Present",
+				date: "10/01/2022",
+				time: "12:26:57",
+				count: 1,
+			},
+			{
+				status: "Present",
+				date: "11/01/2022",
+				time: "12:31:57",
+				count: 1,
+			},
+			{
+				status: "Present",
+				date: "12/01/2022",
+				time: "12:30:57",
 				count: 1,
 			},
 		],
@@ -32,6 +53,24 @@ const students = [
 				time: "12:05:57",
 				count: 1,
 			},
+			{
+				status: "Present",
+				date: "10/01/2022",
+				time: "12:10:57",
+				count: 1,
+			},
+			{
+				status: "Present",
+				date: "11/01/2022",
+				time: "12:15:57",
+				count: 1,
+			},
+			{
+				status: "Present",
+				date: "12/01/2022",
+				time: "12:25:57",
+				count: 1,
+			},
 		],
 	},
 	{
@@ -45,6 +84,24 @@ const students = [
 				time: "12:36:57",
 				count: 1,
 			},
+			{
+				status: "Present",
+				date: "10/01/2022",
+				time: "12:26:57",
+				count: 1,
+			},
+			{
+				status: "Present",
+				date: "11/01/2022",
+				time: "12:56:57",
+				count: 1,
+			},
+			{
+				status: "Present",
+				date: "12/01/2022",
+				time: "12:30:57",
+				count: 1,
+			},
 		],
 	},
 	{
@@ -56,6 +113,24 @@ const students = [
 				status: "Present",
 				date: "09/01/2022",
 				time: "12:36:57",
+				count: 1,
+			},
+			{
+				status: "Present",
+				date: "10/01/2022",
+				time: "12:10:57",
+				count: 1,
+			},
+			{
+				status: "Present",
+				date: "11/01/2022",
+				time: "12:55:57",
+				count: 1,
+			},
+			{
+				status: "Present",
+				date: "12/01/2022",
+				time: "12:50:57",
 				count: 1,
 			},
 		],
@@ -94,6 +169,7 @@ export default function BasicTable() {
 						<TableCell align='left'>Department</TableCell>
 						<TableCell align='left'>Entry Time</TableCell>
 						<TableCell align='left'>Late</TableCell>
+						<TableCell align='left'>Action</TableCell>
 					</TableRow>
 				</TableHead>
 				<TableBody>
@@ -109,13 +185,25 @@ export default function BasicTable() {
 							<TableCell align='left'>{student.name}</TableCell>
 							<TableCell align='left'>{student.department}</TableCell>
 							<TableCell align='left'>
-								{student.attendanceList[0].time}
+								{student.attendanceList[student.attendanceList.length - 1].time}
 							</TableCell>
 							<TableCell align='left'>
 								{formatSeconds(
-									timeToSec(student.attendanceList[0].time) -
-										timeToSec(collegeTime),
+									timeToSec(
+										student.attendanceList[student.attendanceList.length - 1]
+											.time,
+									) - timeToSec(collegeTime),
 								)}
+							</TableCell>
+							<TableCell align='left'>
+								<Link
+									to={`/attendance/${student.roll}`}
+									style={{ textDecoration: "none" }}>
+									<Button variant='contained'>
+										<InfoIcon sx={{ mr: 1 }} />
+										Details
+									</Button>
+								</Link>
 							</TableCell>
 						</TableRow>
 					))}

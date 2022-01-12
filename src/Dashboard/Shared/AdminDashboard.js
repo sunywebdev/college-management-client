@@ -25,8 +25,9 @@ import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
 import LocalAtmIcon from "@mui/icons-material/LocalAtm";
 import DirectionsBusFilledIcon from "@mui/icons-material/DirectionsBusFilled";
 import CoPresentIcon from "@mui/icons-material/CoPresent";
+import EventIcon from "@mui/icons-material/Event";
 
-const drawerWidth = 220;
+const drawerWidth = 250;
 
 function DashboardHome(props) {
 	const { window } = props;
@@ -67,6 +68,21 @@ function DashboardHome(props) {
 							<HomeIcon />
 						</ListItemIcon>
 						<ListItemText primary={"Home"} />
+					</ListItem>
+				</Link>
+				<Link
+					className='color-theme'
+					style={{
+						textDecoration: "none",
+						fontWeight: "bold",
+						fontSize: "15px",
+					}}
+					to=''>
+					<ListItem button>
+						<ListItemIcon>
+							<EventIcon />
+						</ListItemIcon>
+						<ListItemText primary={"Event Management"} />
 					</ListItem>
 				</Link>
 				<Accordion>

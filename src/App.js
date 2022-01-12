@@ -1,15 +1,16 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Students from "./Dashboard/AdminDashboard/Students";
-import Teachers from "./Dashboard/AdminDashboard/Teachers";
-import AddStudents from "./Dashboard/AdminDashboard/AddStudents";
-import AddTeachers from "./Dashboard/AdminDashboard/AddTeachers";
-import Account from "./Dashboard/AdminDashboard/Account";
-import Attendance from "./Dashboard/AdminDashboard/Attendance/Attendance";
-import AddNotices from "./Dashboard/AdminDashboard/AddNotices";
-import AllNotices from "./Dashboard/AdminDashboard/AllNotices";
-import AdminDashboardHome from "./Dashboard/AdminDashboard/AdminDashboardHome";
+import Students from "./Dashboard/Students/Students";
+import Teachers from "./Dashboard/Teachers/Teachers";
+import AddStudents from "./Dashboard/Students/AddStudents";
+import AddTeachers from "./Dashboard/Teachers/AddTeachers";
+import Account from "./Dashboard/Account";
+import Attendance from "./Dashboard/Attendance/Attendance";
+import AddNotices from "./Dashboard/Notices/AddNotices";
+import AllNotices from "./Dashboard/Notices/AllNotices";
+import AdminDashboardHome from "./Dashboard/AdminDashboardHome";
 import AdminDashboard from "./Dashboard/Shared/AdminDashboard";
+import SingleStudent from "./Dashboard/Attendance/SingleStudent";
 
 function App() {
 	return (
@@ -24,6 +25,7 @@ function App() {
 						<Route path='addTeachers' element={<AddTeachers />} />
 						<Route path='account' element={<Account />} />
 						<Route path='attendance' element={<Attendance />} />
+						<Route path='attendance/:roll' element={<SingleStudent />} />
 						<Route path='addNotices' element={<AddNotices />} />
 						<Route path='allNotices' element={<AllNotices />} />
 					</Route>
