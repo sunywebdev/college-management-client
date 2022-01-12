@@ -15,7 +15,12 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { Link, Outlet } from "react-router-dom";
-import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
+import {
+	Accordion,
+	AccordionDetails,
+	AccordionSummary,
+	Paper,
+} from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import HomeIcon from "@mui/icons-material/Home";
 import GroupIcon from "@mui/icons-material/Group";
@@ -25,7 +30,6 @@ import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
 import LocalAtmIcon from "@mui/icons-material/LocalAtm";
 import DirectionsBusFilledIcon from "@mui/icons-material/DirectionsBusFilled";
 import CoPresentIcon from "@mui/icons-material/CoPresent";
-import EventIcon from "@mui/icons-material/Event";
 
 const drawerWidth = 250;
 
@@ -39,8 +43,21 @@ function DashboardHome(props) {
 
 	const drawer = (
 		<div>
-			<Toolbar />
-			<Divider />
+			<Paper elevation={3} sx={{ py: 2, textAlign: "center" }}>
+				<Typography variant='h2' component='div' sx={{ color: "#1976D2" }}>
+					NIT
+				</Typography>
+				<Typography
+					variant='h6'
+					component='div'
+					sx={{ color: "#1976D2", fontWeight: "bold" }}>
+					Polytechnic Institute
+				</Typography>
+				<Typography variant='body' component='div' sx={{ color: "#1976D2" }}>
+					(Muradpur, Chattogram)
+				</Typography>
+			</Paper>
+
 			<List
 				sx={{
 					"& .MuiListItemIcon-root": { justifyContent: "center" },
@@ -77,12 +94,12 @@ function DashboardHome(props) {
 						fontWeight: "bold",
 						fontSize: "15px",
 					}}
-					to=''>
+					to='attendance'>
 					<ListItem button>
 						<ListItemIcon>
-							<EventIcon />
+							<CoPresentIcon />
 						</ListItemIcon>
-						<ListItemText primary={"Event Management"} />
+						<ListItemText primary={"Attendance"} />
 					</ListItem>
 				</Link>
 				<Accordion>
@@ -264,21 +281,6 @@ function DashboardHome(props) {
 						<ListItemText primary={"Account"} />
 					</ListItem>
 				</Link>
-				<Link
-					className='color-theme'
-					style={{
-						textDecoration: "none",
-						fontWeight: "bold",
-						fontSize: "15px",
-					}}
-					to='attendance'>
-					<ListItem button>
-						<ListItemIcon>
-							<CoPresentIcon />
-						</ListItemIcon>
-						<ListItemText primary={"Attendance"} />
-					</ListItem>
-				</Link>
 			</List>
 		</div>
 	);
@@ -310,6 +312,7 @@ function DashboardHome(props) {
 				</Toolbar>
 			</AppBar>
 			<Box
+				onClick={() => setMobileOpen(false)}
 				component='nav'
 				sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
 				aria-label='mailbox folders'>
