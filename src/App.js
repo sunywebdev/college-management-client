@@ -8,9 +8,9 @@ import Account from "./Dashboard/Account";
 import Attendance from "./Dashboard/Attendance/Attendance";
 import AddNotices from "./Dashboard/Notices/AddNotices";
 import AllNotices from "./Dashboard/Notices/AllNotices";
-import AdminDashboardHome from "./Dashboard/AdminDashboardHome";
 import AdminDashboard from "./Dashboard/Shared/AdminDashboard";
 import SingleStudent from "./Dashboard/Attendance/SingleStudent";
+import AdminDashboardHome from "./Dashboard/Home/AdminDashboardHome";
 
 function App() {
 	return (
