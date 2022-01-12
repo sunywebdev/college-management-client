@@ -122,7 +122,7 @@ const SingleStudent = () => {
 				{
 					status: "Present",
 					date: "12/01/2022",
-					time: "12:50:57",
+					time: "11:30:00",
 					count: 1,
 				},
 			],
@@ -186,7 +186,11 @@ const SingleStudent = () => {
 							</li>
 							<li>
 								<b>Late : </b>
-								{formatSeconds(timeToSec(attend.time) - timeToSec(collegeTime))}
+								{attend.time === "11:30:00"
+									? "Ontime"
+									: formatSeconds(
+											timeToSec(attend.time) - timeToSec(collegeTime),
+									  )}
 							</li>
 						</ul>
 					))}
