@@ -9,6 +9,7 @@ import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import InfoIcon from "@mui/icons-material/Info";
 import { Link } from "react-router-dom";
+import { Typography } from "@mui/material";
 
 const students = [
 	{
@@ -160,55 +161,66 @@ const collegeTime = "11:30:00";
 
 export default function BasicTable() {
 	return (
-		<TableContainer component={Paper}>
-			<Table sx={{ minWidth: 650 }} aria-label='simple table'>
-				<TableHead>
-					<TableRow>
-						<TableCell>Roll</TableCell>
-						<TableCell align='left'>Name</TableCell>
-						<TableCell align='left'>Department</TableCell>
-						<TableCell align='left'>Entry Time</TableCell>
-						<TableCell align='left'>Late</TableCell>
-						<TableCell align='left'>Action</TableCell>
-					</TableRow>
-				</TableHead>
-				<TableBody>
-					{students.map((student) => (
-						<TableRow
-							key={student.roll}
-							sx={{
-								"&:last-child td, &:last-child th": { border: 0 },
-							}}>
-							<TableCell component='th' scope='row'>
-								{student.roll}
-							</TableCell>
-							<TableCell align='left'>{student.name}</TableCell>
-							<TableCell align='left'>{student.department}</TableCell>
-							<TableCell align='left'>
-								{student.attendanceList[student.attendanceList.length - 1].time}
-							</TableCell>
-							<TableCell align='left'>
-								{formatSeconds(
-									timeToSec(
-										student.attendanceList[student.attendanceList.length - 1]
-											.time,
-									) - timeToSec(collegeTime),
-								)}
-							</TableCell>
-							<TableCell align='left'>
-								<Link
-									to={`/attendance/${student.roll}`}
-									style={{ textDecoration: "none" }}>
-									<Button variant='contained'>
-										<InfoIcon sx={{ mr: 1 }} />
-										Details
-									</Button>
-								</Link>
-							</TableCell>
+		<>
+			<Typography
+				variant='h4'
+				component='div'
+				sx={{ pb: 1.5, color: "#1976D2", fontWeight: "bold" }}>
+				Attendance
+			</Typography>
+			<TableContainer component={Paper} elevation={3}>
+				<Table sx={{ minWidth: 650 }} aria-label='simple table'>
+					<TableHead>
+						<TableRow>
+							<TableCell>Roll</TableCell>
+							<TableCell align='left'>Name</TableCell>
+							<TableCell align='left'>Department</TableCell>
+							<TableCell align='left'>Entry Time</TableCell>
+							<TableCell align='left'>Late</TableCell>
+							<TableCell align='left'>Action</TableCell>
 						</TableRow>
-					))}
-				</TableBody>
-			</Table>
-		</TableContainer>
+					</TableHead>
+					<TableBody>
+						{students.map((student) => (
+							<TableRow
+								key={student.roll}
+								sx={{
+									"&:last-child td, &:last-child th": { border: 0 },
+								}}>
+								<TableCell component='th' scope='row'>
+									{student.roll}
+								</TableCell>
+								<TableCell align='left'>{student.name}</TableCell>
+								<TableCell align='left'>{student.department}</TableCell>
+								<TableCell align='left'>
+									{
+										student.attendanceList[student.attendanceList.length - 1]
+											.time
+									}
+								</TableCell>
+								<TableCell align='left'>
+									{formatSeconds(
+										timeToSec(
+											student.attendanceList[student.attendanceList.length - 1]
+												.time,
+										) - timeToSec(collegeTime),
+									)}
+								</TableCell>
+								<TableCell align='left'>
+									<Link
+										to={`/attendance/${student.roll}`}
+										style={{ textDecoration: "none" }}>
+										<Button variant='contained'>
+											<InfoIcon sx={{ mr: 1 }} />
+											Details
+										</Button>
+									</Link>
+								</TableCell>
+							</TableRow>
+						))}
+					</TableBody>
+				</Table>
+			</TableContainer>
+		</>
 	);
 }
