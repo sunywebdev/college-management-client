@@ -128,10 +128,31 @@ const SingleStudent = () => {
 			],
 		},
 	];
+	function timeToSec(str) {
+		var p = str.split(":"),
+			s = 0,
+			m = 1;
+
+		while (p.length > 0) {
+			s += m * parseInt(p.pop(), 10);
+			m *= 60;
+		}
+
+		return s;
+	}
+	function formatSeconds(seconds) {
+		var date = new Date(1970, 0, 1);
+		date.setSeconds(seconds);
+		return date.toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1");
+	}
+
+	const collegeTime = "11:30:00";
+
 	const roll = useParams();
 	var student = students.find(
 		(student) => student.roll === parseInt(roll?.roll),
 	);
+
 	return (
 		<div>
 			<ul style={{ textAlign: "left" }}>
@@ -151,9 +172,22 @@ const SingleStudent = () => {
 					<b>Attendance List :</b>
 					{student.attendanceList.map((attend, key) => (
 						<ul key={key} style={{ margin: "7px 0" }}>
-							<li>{attend?.status}</li>
-							<li>{attend?.date}</li>
-							<li>{attend?.time}</li>
+							<li>
+								<b>Status : </b>
+								{attend?.status}
+							</li>
+							<li>
+								<b>Date : </b>
+								{attend?.date}
+							</li>
+							<li>
+								<b>Entry Time : </b>
+								{attend?.time}
+							</li>
+							<li>
+								<b>Late : </b>
+								{formatSeconds(timeToSec(attend.time) - timeToSec(collegeTime))}
+							</li>
 						</ul>
 					))}
 				</li>
