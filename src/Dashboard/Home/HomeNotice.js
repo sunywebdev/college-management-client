@@ -30,8 +30,8 @@ const HomeNotice = () => {
 					container
 					spacing={2}
 					sx={{ maxHeight: "50vh", overflowY: "scroll", py: 2 }}>
-					{notices?.map((notice) => (
-						<Grid item md={12} xs={12}>
+					{notices?.map((notice, key) => (
+						<Grid key={key} item md={12} xs={12}>
 							<Card
 								sx={{ textAlign: "left", mx: 2, color: "#1976D2" }}
 								elevation={3}>

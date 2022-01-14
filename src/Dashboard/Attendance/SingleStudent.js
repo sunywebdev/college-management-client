@@ -8,7 +8,6 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
 const SingleStudent = ({ roll }) => {
-	console.log(roll);
 	function timeToSec(str) {
 		var p = str.split(":"),
 			s = 0,

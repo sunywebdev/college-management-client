@@ -249,9 +249,9 @@ export default function BasicTable() {
 						</TableRow>
 					</TableHead>
 					<TableBody>
-						{students.map((student) => (
+						{students.map((student, key) => (
 							<TableRow
-								key={student.roll}
+								key={student.id}
 								sx={{
 									"&:last-child td, &:last-child th": { border: 0 },
 								}}>

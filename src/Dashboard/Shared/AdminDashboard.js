@@ -29,6 +29,7 @@ import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
 import LocalAtmIcon from "@mui/icons-material/LocalAtm";
 import DirectionsBusFilledIcon from "@mui/icons-material/DirectionsBusFilled";
 import CoPresentIcon from "@mui/icons-material/CoPresent";
+import AssessmentIcon from "@mui/icons-material/Assessment";
 
 const drawerWidth = 250;
 
@@ -42,17 +43,19 @@ function DashboardHome(props) {
 
 	const drawer = (
 		<div>
-			<Paper elevation={3} sx={{ py: 2, textAlign: "center" }}>
-				<Typography variant='h2' component='div' sx={{ color: "#1976D2" }}>
+			<Paper
+				elevation={3}
+				sx={{ py: 2, textAlign: "center", bgcolor: "#1976D2" }}>
+				<Typography variant='h2' component='div' sx={{ color: "white" }}>
 					NIT
 				</Typography>
 				<Typography
 					variant='h6'
 					component='div'
-					sx={{ color: "#1976D2", fontWeight: "bold" }}>
+					sx={{ color: "white", fontWeight: "bold" }}>
 					Polytechnic Institute
 				</Typography>
-				<Typography variant='body' component='div' sx={{ color: "#1976D2" }}>
+				<Typography variant='body' component='div' sx={{ color: "white" }}>
 					(Muradpur, Chattogram)
 				</Typography>
 			</Paper>
@@ -223,7 +226,21 @@ function DashboardHome(props) {
 						</Link>
 					</AccordionDetails>
 				</Accordion>
-
+				<Link
+					className='color-theme'
+					style={{
+						textDecoration: "none",
+						fontWeight: "bold",
+						fontSize: "15px",
+					}}
+					to='report'>
+					<ListItem button>
+						<ListItemIcon>
+							<AssessmentIcon />
+						</ListItemIcon>
+						<ListItemText primary={"Report"} />
+					</ListItem>
+				</Link>
 				<Accordion>
 					<AccordionSummary
 						expandIcon={<ExpandMoreIcon />}

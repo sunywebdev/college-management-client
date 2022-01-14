@@ -39,8 +39,9 @@ const AllNotices = () => {
 					<TableBody>
 						{notices?.length > 0 ? (
 							<>
-								{notices?.map((notice) => (
+								{notices?.map((notice, key) => (
 									<TableRow
+										key={key}
 										sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
 										<TableCell component='th' scope='row'>
 											{serial++}

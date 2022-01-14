@@ -10,6 +10,7 @@ import AddNotices from "./Dashboard/Notices/AddNotices";
 import AllNotices from "./Dashboard/Notices/AllNotices";
 import AdminDashboard from "./Dashboard/Shared/AdminDashboard";
 import AdminDashboardHome from "./Dashboard/Home/AdminDashboardHome";
+import DailyReport from "./Dashboard/Summary/DailyReport";
 
 function App() {
 	return (
@@ -19,6 +20,7 @@ function App() {
 					<Route path='/' element={<AdminDashboard />}>
 						<Route exact path='/' element={<AdminDashboardHome />} />
 						<Route path='students' element={<Students />} />
+						<Route path='report' element={<DailyReport />} />
 						<Route path='teachers' element={<Teachers />} />
 						<Route path='addStudents' element={<AddStudents />} />
 						<Route path='addTeachers' element={<AddTeachers />} />

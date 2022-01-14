@@ -1,3 +1,10 @@
 .App {
 	text-align: center;
 }
+.recharts-wrapper .recharts-surface {
+	height: auto !important;
+	width: auto !important;
+}
+.recharts-legend-wrapper {
+	bottom: -140px !important;
+}

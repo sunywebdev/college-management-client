@@ -1,0 +1,11 @@
+.recharts-wrapper {
+	position: relative;
+	cursor: default;
+	width: 211px !important;
+	height: 148px !important;
+}
+.recharts-surface {
+	height: 130px !important;
+	width: 200px !important;
+    overflow: visible;
+}
