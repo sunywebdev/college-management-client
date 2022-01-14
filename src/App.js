@@ -9,7 +9,6 @@ import Attendance from "./Dashboard/Attendance/Attendance";
 import AddNotices from "./Dashboard/Notices/AddNotices";
 import AllNotices from "./Dashboard/Notices/AllNotices";
 import AdminDashboard from "./Dashboard/Shared/AdminDashboard";
-import SingleStudent from "./Dashboard/Attendance/SingleStudent";
 import AdminDashboardHome from "./Dashboard/Home/AdminDashboardHome";
 
 function App() {
@@ -25,7 +24,6 @@ function App() {
 						<Route path='addTeachers' element={<AddTeachers />} />
 						<Route path='account' element={<Account />} />
 						<Route path='attendance' element={<Attendance />} />
-						<Route path='attendance/:roll' element={<SingleStudent />} />
 						<Route path='addNotices' element={<AddNotices />} />
 						<Route path='allNotices' element={<AllNotices />} />
 					</Route>

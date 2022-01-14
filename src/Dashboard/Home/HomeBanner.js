@@ -4,6 +4,7 @@ import SchoolIcon from "@mui/icons-material/School";
 import { Box } from "@mui/system";
 import CoPresentIcon from "@mui/icons-material/CoPresent";
 import LocalAtmIcon from "@mui/icons-material/LocalAtm";
+import { CountUp } from "use-count-up";
 
 const HomeBanner = () => {
 	return (
@@ -22,7 +23,7 @@ const HomeBanner = () => {
 								Students
 							</Typography>
 							<Typography variant='h5' component='div'>
-								500
+								<CountUp isCounting end={500} duration={3} />
 							</Typography>
 						</Box>
 					</Box>
@@ -42,7 +43,7 @@ const HomeBanner = () => {
 								Teachers
 							</Typography>
 							<Typography variant='h5' component='div'>
-								500
+								<CountUp isCounting end={500} duration={3} />
 							</Typography>
 						</Box>
 					</Box>
@@ -62,7 +63,7 @@ const HomeBanner = () => {
 								Income
 							</Typography>
 							<Typography variant='h5' component='div'>
-								500$
+								<CountUp isCounting end={500} duration={3} />$
 							</Typography>
 						</Box>
 					</Box>

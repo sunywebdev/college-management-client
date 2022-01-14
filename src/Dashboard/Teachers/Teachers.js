@@ -5,6 +5,7 @@ import {
 	GridToolbarExport,
 	gridClasses,
 } from "@mui/x-data-grid";
+import { Typography } from "@mui/material";
 
 function CustomToolbar() {
 	return (
@@ -23,18 +24,21 @@ export default function Teachers() {
 	}, []);
 
 	const columns = [
-		{ field: "id", headerName: "Roll", width: 100 },
-		{ field: "name", headerName: "Name", width: 200 },
-		{ field: "dept", headerName: "Department", width: 130 },
-		{ field: "semester", headerName: "Semester", width: 110 },
-		{ field: "section", headerName: "Section", width: 100 },
-		{ field: "session", headerName: "Session", width: 100 },
-		{ field: "teacher", headerName: "Guide Teacher", width: 130 },
-		{ field: "address", headerName: "Address", width: 100 },
+		{ field: "id", headerName: "ID", width: 100 },
+		{ field: "name", headerName: "Name", width: 220 },
+		{ field: "department", headerName: "Department", width: 150 },
+		{ field: "gender", headerName: "Gender", width: 150 },
+		{ field: "mobile", headerName: "Mobile", width: 200 },
 	];
 
 	return (
-		<div style={{ height: 500, width: "100%" }}>
+		<div style={{ height: 450, width: "100%" }}>
+			<Typography
+				variant='h4'
+				component='div'
+				sx={{ pb: 1.5, color: "#1976D2", fontWeight: "bold" }}>
+				All Teachers
+			</Typography>
 			<DataGrid
 				rows={students}
 				columns={columns}

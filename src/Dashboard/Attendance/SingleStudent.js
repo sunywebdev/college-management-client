@@ -1,133 +1,14 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
 
-const SingleStudent = () => {
-	const students = [
-		{
-			name: "Shoyeb Mohammed Suny",
-			roll: 172015,
-			department: "Computer",
-			attendanceList: [
-				{
-					status: "Present",
-					date: "09/01/2022",
-					time: "12:36:57",
-					count: 1,
-				},
-				{
-					status: "Present",
-					date: "10/01/2022",
-					time: "12:26:57",
-					count: 1,
-				},
-				{
-					status: "Present",
-					date: "11/01/2022",
-					time: "12:31:57",
-					count: 1,
-				},
-				{
-					status: "Present",
-					date: "12/01/2022",
-					time: "12:30:57",
-					count: 1,
-				},
-			],
-		},
-		{
-			name: "Ahsan Mustafa",
-			roll: 172020,
-			department: "Computer",
-			attendanceList: [
-				{
-					status: "Present",
-					date: "09/01/2022",
-					time: "12:05:57",
-					count: 1,
-				},
-				{
-					status: "Present",
-					date: "10/01/2022",
-					time: "12:10:57",
-					count: 1,
-				},
-				{
-					status: "Present",
-					date: "11/01/2022",
-					time: "12:15:57",
-					count: 1,
-				},
-				{
-					status: "Present",
-					date: "12/01/2022",
-					time: "12:25:57",
-					count: 1,
-				},
-			],
-		},
-		{
-			name: "Mohiuddin Sakib",
-			roll: 172001,
-			department: "Computer",
-			attendanceList: [
-				{
-					status: "Present",
-					date: "09/01/2022",
-					time: "12:36:57",
-					count: 1,
-				},
-				{
-					status: "Present",
-					date: "10/01/2022",
-					time: "12:26:57",
-					count: 1,
-				},
-				{
-					status: "Present",
-					date: "11/01/2022",
-					time: "12:56:57",
-					count: 1,
-				},
-				{
-					status: "Present",
-					date: "12/01/2022",
-					time: "12:30:57",
-					count: 1,
-				},
-			],
-		},
-		{
-			name: "Md Safayet",
-			roll: 172016,
-			department: "Computer",
-			attendanceList: [
-				{
-					status: "Present",
-					date: "09/01/2022",
-					time: "12:36:57",
-					count: 1,
-				},
-				{
-					status: "Present",
-					date: "10/01/2022",
-					time: "12:10:57",
-					count: 1,
-				},
-				{
-					status: "Present",
-					date: "11/01/2022",
-					time: "12:55:57",
-					count: 1,
-				},
-				{
-					status: "Present",
-					date: "12/01/2022",
-					time: "11:30:00",
-					count: 1,
-				},
-			],
-		},
-	];
+const SingleStudent = ({ roll }) => {
+	console.log(roll);
 	function timeToSec(str) {
 		var p = str.split(":"),
 			s = 0,
@@ -147,53 +28,70 @@ const SingleStudent = () => {
 	}
 
 	const collegeTime = "11:30:00";
-
-	const roll = useParams();
-	var student = students.find(
-		(student) => student.roll === parseInt(roll?.roll),
-	);
+	const [student, setStudent] = React.useState([]);
+	React.useEffect(() => {
+		fetch(
+			`https://ancient-plains-93212.herokuapp.com/findstudents?roll=${roll}`,
+		)
+			.then((res) => res.json())
+			.then((data) => setStudent(data));
+	}, [roll]);
 
 	return (
 		<div>
 			<ul style={{ textAlign: "left" }}>
 				<li>
-					<b>Name :</b>
+					<b>Name : </b>
 					{student.name}
 				</li>
 				<li>
-					<b>Roll :</b>
-					{student.roll}
+					<b>Roll : </b>
+					{student.id}
 				</li>
 				<li>
-					<b>Department :</b>
-					{student.department}
+					<b>Department : </b>
+					{student.dept}
 				</li>
 				<li>
-					<b>Attendance List :</b>
-					{student.attendanceList.map((attend, key) => (
-						<ul key={key} style={{ margin: "7px 0" }}>
-							<li>
-								<b>Status : </b>
-								{attend?.status}
-							</li>
-							<li>
-								<b>Date : </b>
-								{attend?.date}
-							</li>
-							<li>
-								<b>Entry Time : </b>
-								{attend?.time}
-							</li>
-							<li>
-								<b>Late : </b>
-								{attend.time === "11:30:00"
-									? "Ontime"
-									: formatSeconds(
-											timeToSec(attend.time) - timeToSec(collegeTime),
-									  )}
-							</li>
-						</ul>
-					))}
+					<b>Attendance List : </b>
+					<TableContainer component={Paper} elevation={5} sx={{ mt: 1.5 }}>
+						<Table aria-label='simple table'>
+							<TableHead>
+								<TableRow>
+									<TableCell align='center' sx={{ fontWeight: "bold" }}>
+										Status
+									</TableCell>
+									<TableCell align='center' sx={{ fontWeight: "bold" }}>
+										Date
+									</TableCell>
+									<TableCell align='center' sx={{ fontWeight: "bold" }}>
+										Entry Time{" "}
+									</TableCell>
+									<TableCell align='center' sx={{ fontWeight: "bold" }}>
+										Late
+									</TableCell>
+								</TableRow>
+							</TableHead>
+							<TableBody>
+								{student?.attendanceList?.map((attend, key) => (
+									<TableRow
+										key={key}
+										sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+										<TableCell align='center'>{attend?.status}</TableCell>
+										<TableCell align='center'>{attend?.date}</TableCell>
+										<TableCell align='center'>{attend?.time}</TableCell>
+										<TableCell align='center'>
+											{timeToSec(collegeTime) >= timeToSec(attend.time)
+												? "Ontime"
+												: formatSeconds(
+														timeToSec(attend.time) - timeToSec(collegeTime),
+												  )}
+										</TableCell>
+									</TableRow>
+								))}
+							</TableBody>
+						</Table>
+					</TableContainer>
 				</li>
 			</ul>
 		</div>

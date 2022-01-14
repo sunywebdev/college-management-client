@@ -6,17 +6,24 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { Typography } from "@mui/material";
 
 const AllNotices = () => {
 	const [notices, setNotices] = useState([]);
 	useEffect(() => {
-		fetch(`http://localhost:5000/notices`)
+		fetch(`https://ancient-plains-93212.herokuapp.com/notices`)
 			.then((res) => res.json())
-			.then((data) => setNotices(data));
+			.then((data) => setNotices(data.reverse()));
 	}, []);
 	let serial = 1;
 	return (
 		<div>
+			<Typography
+				variant='h4'
+				component='div'
+				sx={{ pb: 1.5, color: "#1976D2", fontWeight: "bold" }}>
+				All Notices
+			</Typography>
 			<TableContainer component={Paper}>
 				<Table sx={{ minWidth: 650 }} size='small' aria-label='a dense table'>
 					<TableHead>

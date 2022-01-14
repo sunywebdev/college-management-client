@@ -8,8 +8,15 @@ import {
 	Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
+import { useEffect, useState } from "react";
 
 const HomeNotice = () => {
+	const [notices, setNotices] = useState([]);
+	useEffect(() => {
+		fetch(`https://ancient-plains-93212.herokuapp.com/notices`)
+			.then((res) => res.json())
+			.then((data) => setNotices(data.reverse()));
+	}, []);
 	return (
 		<Box>
 			<Paper elevation={3} sx={{ my: 3 }}>
@@ -23,25 +30,22 @@ const HomeNotice = () => {
 					container
 					spacing={2}
 					sx={{ maxHeight: "50vh", overflowY: "scroll", py: 2 }}>
-					{Array.from({ length: 4 }).map((_, idx) => (
+					{notices?.map((notice) => (
 						<Grid item md={12} xs={12}>
 							<Card
 								sx={{ textAlign: "left", mx: 2, color: "#1976D2" }}
 								elevation={3}>
 								<CardHeader
-									avatar={<Avatar sx={{ bgcolor: "red" }}>A</Avatar>}
-									title='Md Ahsan Habib'
-									subheader='Janurary 14, 2022'
+									avatar={<Avatar sx={{ bgcolor: "red" }}></Avatar>}
+									title={`${notice?.postedBy} (${notice?.role})`}
+									subheader={`${notice?.time}`}
 								/>
 								<CardContent>
+									<Typography variant='h6' color='text.secondary'>
+										{notice?.title}
+									</Typography>
 									<Typography variant='body2' color='text.secondary'>
-										Lorem ipsum dolor sit amet consectetur adipisicing elit.
-										Dolore, hic libero odio nemo modi saepe maiores perspiciatis
-										enim illo iste temporibus aliquid laudantium voluptas
-										accusamus, totam, placeat est quia sed dicta nulla mollitia
-										assumenda voluptatem tempora! Eaque exercitationem
-										accusantium est officiis, aliquam, excepturi suscipit at
-										minus aliquid dolores dolore dicta?
+										{notice?.notice}
 									</Typography>
 								</CardContent>
 							</Card>
