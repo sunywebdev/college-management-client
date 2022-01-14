@@ -1,79 +1,50 @@
-import React, { useEffect, useState } from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
+import * as React from "react";
+import {
+	DataGrid,
+	GridToolbarContainer,
+	GridToolbarExport,
+	gridClasses,
+} from "@mui/x-data-grid";
 
-const Students = () => {
-	const [students, setStudents] = useState([]);
-	useEffect(() => {
-		fetch(`http://localhost:5000/students`)
+function CustomToolbar() {
+	return (
+		<GridToolbarContainer className={gridClasses.toolbarContainer}>
+			<GridToolbarExport />
+		</GridToolbarContainer>
+	);
+}
+
+export default function Students() {
+	const [students, setStudents] = React.useState([]);
+	React.useEffect(() => {
+		fetch(`https://ancient-plains-93212.herokuapp.com/students`)
 			.then((res) => res.json())
 			.then((data) => setStudents(data));
-	},[]);
-	let serial = 1;
+	}, []);
+
+	const columns = [
+		{ field: "id", headerName: "Roll", width: 100 },
+		{ field: "name", headerName: "Name", width: 200 },
+		{ field: "dept", headerName: "Department", width: 130 },
+		{ field: "semester", headerName: "Semester", width: 110 },
+		{ field: "section", headerName: "Section", width: 100 },
+		{ field: "session", headerName: "Session", width: 100 },
+		{ field: "teacher", headerName: "Guide Teacher", width: 130 },
+		{ field: "address", headerName: "Address", width: 100 },
+	];
+
 	return (
-		<div>
-			<TableContainer component={Paper}>
-				<Table sx={{ minWidth: 650 }} size='small' aria-label='a dense table'>
-					<TableHead>
-						<TableRow>
-							<TableCell align='left'>No</TableCell>
-							<TableCell align='left'>Name</TableCell>
-							<TableCell align='left'>Gender</TableCell>
-							<TableCell align='left'>Roll No</TableCell>
-							<TableCell align='left'>Reg No</TableCell>
-							<TableCell align='left'>Semester</TableCell>
-							<TableCell align='left'>Session</TableCell>
-							<TableCell align='left'>Dept</TableCell>
-							<TableCell align='left'>Section</TableCell>
-							<TableCell align='left'>Mobile No</TableCell>
-						</TableRow>
-					</TableHead>
-					<TableBody>
-						{students?.length > 0 ? (
-							<>
-								{students?.map((student) => (
-									<TableRow
-										sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
-										<TableCell component='th' scope='row'>
-											{serial++}
-										</TableCell>
-										<TableCell align='left'>{student?.name}</TableCell>
-										<TableCell align='left'>{student?.gender}</TableCell>
-										<TableCell align='left'>{student?.roll}</TableCell>
-										<TableCell align='left'>{student?.reg}</TableCell>
-										<TableCell align='left'>{student?.semester}</TableCell>
-										<TableCell align='left'>{student?.session}</TableCell>
-										<TableCell align='left'>{student?.dept}</TableCell>
-										<TableCell align='left'>{student?.section}</TableCell>
-										<TableCell align='left'>{student?.cellNo}</TableCell>
-									</TableRow>
-								))}
-							</>
-						) : (
-							<TableRow
-								sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
-								<TableCell align='left'>N/A</TableCell>
-								<TableCell align='left'>N/A</TableCell>
-								<TableCell align='left'>N/A</TableCell>
-								<TableCell align='left'>N/A</TableCell>
-								<TableCell align='left'>N/A</TableCell>
-								<TableCell align='left'>N/A</TableCell>
-								<TableCell align='left'>N/A</TableCell>
-								<TableCell align='left'>N/A</TableCell>
-								<TableCell align='left'>N/A</TableCell>
-								<TableCell align='left'>N/A</TableCell>
-							</TableRow>
-						)}
-					</TableBody>
-				</Table>
-			</TableContainer>
+		<div style={{ height: 500, width: "100%" }}>
+			<DataGrid
+				rows={students}
+				columns={columns}
+				pageSize={5}
+				rowsPerPageOptions={[5]}
+				checkboxSelection
+				components={{
+					Toolbar: CustomToolbar,
+				}}
+			/>
 		</div>
 	);
-};
-
-export default Students;
+}
