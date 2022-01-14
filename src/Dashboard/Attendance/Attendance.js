@@ -283,13 +283,12 @@ export default function BasicTable() {
 								</TableCell>
 								<TableCell align='left'>{student.dept}</TableCell>
 								<TableCell align='left'>
-									<Button variant='contained' onClick={handleOpen}>
-										<InfoIcon
-											sx={{ mr: 1 }}
-											onClick={() => setRoll(student.id)}
-										/>
-										Details
-									</Button>
+									<Box onClick={() => setRoll(student.id)}>
+										<Button variant='contained' onClick={handleOpen}>
+											<InfoIcon sx={{ mr: 1 }} />
+											Details
+										</Button>
+									</Box>
 								</TableCell>
 							</TableRow>
 						))}
